@@ -1,0 +1,42 @@
+﻿@{
+    int statusCode = 401; // Default status code
+    string message = "Page Not Found"; // Default message
+    if (ViewBag.StatusCode != null)
+    {
+        statusCode = ViewBag.StatusCode;
+    }
+    if (ViewBag.ErrorMessage != null)
+    {
+        message = ViewBag.ErrorMessage;
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/StyleSheet.css" />
+    <link href="https://fonts.googleapis.com/css?family=Anton|Passion+One|PT+Sans+Caption" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+    <!-- Error Page -->
+    <div class="error">
+        <div class="container-fluid">
+            <div class="col-xs-12 ground-color text-center">
+                <div class="container-error-404">
+                    <div class="clip"><div class="shadow"><span class="digit thirdDigit"></span></div></div>
+                    <div class="clip"><div class="shadow"><span class="digit secondDigit"></span></div></div>
+                    <div class="clip"><div class="shadow"><span class="digit firstDigit"></span></div></div>
+                    <div class="msg">OH!<span class="triangle"></span></div>
+                </div>
+                <h2 class="h1">@message</h2>
+                <h3 class="h2">Error Code: @statusCode</h3>
+            </div>
+        </div>
+    </div>
+    <!-- Error Page -->
+
+    <script src="~/Script.js"></script>
+</body>
+</html>

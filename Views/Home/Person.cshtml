@@ -1,0 +1,132 @@
+﻿@using static CRUD.Services.PersonService
+@{
+    string classcolor = "bg-light";
+}
+<form action="~/person" method="get">
+    <h1>Persons</h1>
+    <div class="box flex">
+        <div class="flex-1">
+            <select class="form-input" name="searchBy">
+                @foreach(var a in ViewBag.SearchData){
+                    <option value="@a.Key">@a.Value</option>
+                }
+            </select>
+        </div>
+        <div class="flex-1">
+            <input type="search" class="form-input" placeholder="Search" name="query">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </div>
+        <div class="flex-1">
+            <button class="btn btn-outline-success my-2 my-sm-0" asp-controller="Home" asp-action="PersonsPdf">Download as Pdf</button>
+        </div>
+    </div>
+    <div class="responsive-table">
+        <table class="table table-hover ">
+            <thead>
+                <tr>
+                    @if (ViewBag.Column == "Id" && ViewBag.SortBy == "ASC")
+                    {
+                        <th><a href="~/person?searchBy=@ViewBag.SearchBy&query=@ViewBag.Query&column=Id&sortBy=DESC" class="text-white">Guid ↓</a></th>
+                    }
+                    else if (ViewBag.Column == "Id" && ViewBag.SortBy == "DESC")
+                    {
+                        <th><a href="~/person?searchBy=@ViewBag.SearchBy&query=@ViewBag.Query&column=Id&sortBy=ASC" class="text-white">Guid ↑</a></th>
+                    }
+                    else
+                    {
+                        <th><a href="~/person?searchBy=@ViewBag.SearchBy&query=@ViewBag.Query&column=Id&sortBy=ASC" class="text-white">Guid</a></th>
+                    }
+
+                    @if (ViewBag.Column == "FirstName" && ViewBag.SortBy == "ASC")
+                    {
+                        <th><a href="~/person?searchBy=@ViewBag.SearchBy&query=@ViewBag.Query&column=FirstName&sortBy=DESC" class="text-white">First Name ↓</a></th>
+                    }
+                    else if (ViewBag.Column == "FirstName" && ViewBag.SortBy == "DESC")
+                    {
+                        <th><a href="~/person?searchBy=@ViewBag.SearchBy&query=@ViewBag.Query&column=FirstName&sortBy=ASC" class="text-white">First Name ↑</a></th>
+                    }
+                    else
+                    {
+                        <th><a href="~/person?searchBy=@ViewBag.SearchBy&query=@ViewBag.Query&column=FirstName&sortBy=ASC" class="text-white">First Name</a></th>
+                    }
+
+                    @if (ViewBag.Column == "LastName" && ViewBag.SortBy == "ASC")
+                    {
+                        <th><a href="~/person?searchBy=@ViewBag.SearchBy&query=@ViewBag.Query&column=LastName&sortBy=DESC" class="text-white">Last Name ↓</a></th>
+                    }
+                    else if (ViewBag.Column == "LastName" && ViewBag.SortBy == "DESC")
+                    {
+                        <th><a href="~/person?searchBy=@ViewBag.SearchBy&query=@ViewBag.Query&column=LastName&sortBy=ASC" class="text-white">Last Name ↑</a></th>
+                    }
+                    else
+                    {
+                        <th><a href="~/person?searchBy=@ViewBag.SearchBy&query=@ViewBag.Query&column=LastName&sortBy=ASC" class="text-white">Last Name</a></th>
+                    }
+
+                    @if (ViewBag.Column == "Email" && ViewBag.SortBy == "ASC")
+                    {
+                        <th><a href="~/person?searchBy=@ViewBag.SearchBy&query=@ViewBag.Query&column=Email&sortBy=DESC" class="text-white">Email ↓</a></th>
+                    }
+                    else if (ViewBag.Column == "Email" && ViewBag.SortBy == "DESC")
+                    {
+                        <th><a href="~/person?searchBy=@ViewBag.SearchBy&query=@ViewBag.Query&column=Email&sortBy=ASC" class="text-white">Email ↑</a></th>
+                    }
+                    else
+                    {
+                        <th><a href="~/person?searchBy=@ViewBag.SearchBy&query=@ViewBag.Query&column=Email&sortBy=DESC" class="text-white">Email</a></th>
+                    }
+
+                    @if (ViewBag.Column == "CountryObject" && ViewBag.SortBy == "ASC")
+                    {
+                        <th><a href="~/person?searchBy=@ViewBag.SearchBy&query=@ViewBag.Query&column=CountryObject&sortBy=DESC" class="text-white">Country ↓</a></th>
+                    }
+                    else if (ViewBag.Column == "CountryObject" && ViewBag.SortBy == "DESC")
+                    {
+                        <th><a href="~/person?searchBy=@ViewBag.SearchBy&query=@ViewBag.Query&column=CountryObject&sortBy=ASC" class="text-white">Country ↑</a></th>
+                    }
+                    else
+                    {
+                        <th><a href="~/person?searchBy=@ViewBag.SearchBy&query=@ViewBag.Query&column=CountryObject&sortBy=ASC" class="text-white">Country </a></th>
+                    }
+                    <th>Options</th>
+
+                
+                
+                
+            </tr>
+        </thead>
+
+        <tbody>
+            
+                @foreach(var a in ViewBag.Data){
+                    <tr class="@classcolor">
+                        <td>@a.Id</td>
+                        <td>@a.FirstName</td>
+                        <td>@a.LastName</td>
+                        <td>@a.Email</td>
+                        <td>@a.CountryObject.Name</td>
+                        <td><a asp-controller="Home" asp-action="Edit" asp-route-Id="@a.Id">Edit</a><br /><a asp-controller="Home" asp-action="Delete" asp-route-Id="@a.Id">Remove</a></td>
+
+                    </tr>
+
+                    if(classcolor=="bg-light"){
+                        classcolor = "";
+                    }
+                    else{
+                        classcolor = "bg-light";
+                    }
+                } 
+            
+        </tbody>
+    </table>
+
+</div>
+@* <div class="container"> *@
+@*         @if (ViewData.ContainsKey("searchBy")){ *@
+@*             <h3>SearchBy = @ViewData["searchBy"]</h3> *@
+@*         } *@
+@*         @if(ViewData.ContainsKey("column")){ *@
+@*             <h3>Sortby = @ViewBag.column</h3> *@
+@*         } *@
+@* </div> *@
+</form>

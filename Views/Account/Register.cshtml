@@ -1,0 +1,78 @@
+﻿@model CRUD.Models.RegisterDTO;
+
+@{
+    ViewBag.Title = "Register Page";
+}
+<div class="container h-100vh">
+    <div class="row row h-100 align-items-center justify-content-centerr">
+        <div class="col align-self-cente ">
+            <div class="card">
+                <div class="card-header text-center display-4">
+                    Register
+                </div>
+                <div class="card-body">
+                    <form asp-controller="Account" asp-action="Register" method="post">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label asp-for="PersonName">Name</label>
+                                <input asp-for="PersonName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label asp-for="Email">Email</label>
+                                <input asp-for="Email" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label asp-for="Phone">Phone Number</label>
+                                <input asp-for="Phone" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label asp-for="Password">Password</label>
+                                <input asp-for="Password" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label asp-for="ConfirmPassword">Confirm Password</label>
+                                <input asp-for="ConfirmPassword" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>User Type</label>
+
+                                <div class="form-check">
+                                    <input type="radio" asp-for="UserType" class="form-check-input" value="Admin" id="Admin">
+                                    <label class="form-check-label" for="Admin">Admin</label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input type="radio" asp-for="UserType" class="form-check-input" value="User" id="User">
+                                    <label class="form-check-label" for="User">User</label>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+
+                        <div class="form-group">
+                            <small><a asp-controller="Account" asp-action="Login" class="form-text text-muted">I have an account!</a></small>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+                        <div asp-validation-summary="All"></div>
+                        @if (ViewData.ContainsKey("Errors"))
+                        {
+                            <ul>
+                                @foreach (var error in ViewBag.Errors)
+                                {
+                                    <li>@error</li>
+                                }
+                            </ul>
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
